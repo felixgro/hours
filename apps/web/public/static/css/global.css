@@ -8,16 +8,26 @@ header {
 	position: relative;
 	height: 60px;
 	margin: 30px;
-	padding-bottom: 10px;
+	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
 }
 
-header nav {
+header > div {
 	display: flex;
 	align-items: center;
+	height: 100%;
+	gap: 16px;
+}
+
+header nav {
+	position: relative;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 16px;
 }
 
 .profile-menu {
@@ -33,13 +43,14 @@ header nav {
 	align-items: center;
 	padding: 10px 16px;
 	border-radius: 8px;
+	z-index: 10;
 	transition: background 110ms ease-out;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 }
 
 .profile-menu button:hover,
-.profile-menu button:focus {
+.profile-menu button:focus-within {
 	background: #f4f4f4;
 }
 
@@ -48,7 +59,7 @@ header nav {
 	opacity: 1;
 }
 
-.profile-menu button:focus .profile-menu-dropdown {
+.profile-menu button:focus-within .profile-menu-dropdown {
 	transform: scaleY(1);
 	opacity: 1;
 }
@@ -56,21 +67,23 @@ header nav {
 .profile-menu img {
 	width: 24px;
 	height: 24px;
-	margin-left: 12px;
+	margin-right: 12px;
 	border-radius: 50%;
-	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 .profile-menu span {
-	font-size: 11pt;
+	font-size: 10.5pt;
+	color: #333;
+	font-weight: 600;
 }
 
 .profile-menu-dropdown {
 	position: absolute;
 	right: 0;
+	z-index: -1;
 	top: 100%;
 	width: 100%;
-	padding: 14px;
+	padding: 17px;
 	list-style: none;
 	display: flex;
 	align-items: flex-start;

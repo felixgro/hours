@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { signOut } from 'next-auth/react';
+import { VerticalLine } from './shared/VerticalLine';
 
 type ProfileMenuProps = {
 	image?: string;
@@ -15,27 +16,26 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({ image, name }) => {
 		avatarImg.src = '/static/icons/avatar.png';
 	};
 
+	const logout: React.ReactEventHandler<HTMLAnchorElement> = (e) => {
+		e.preventDefault();
+		signOut();
+	};
+
 	return (
 		<div className="profile-menu">
 			<button>
-				<span>{name}</span>
 				<img src={image} alt={name} onError={showAvatarFallback} />
+				<span>{name}</span>
 				<ul className="profile-menu-dropdown">
 					<li>
-						<a href="/profile">Profile</a>
+						<a href="/dashboard">Dashboard</a>
 					</li>
 					<li>
-						<a href="/settings">Settings</a>
+						<a href="/account">Account</a>
 					</li>
 					<li>
-						<a
-							href="#"
-							onClick={(e) => {
-								e.preventDefault();
-								signOut();
-							}}
-						>
-							Sign Out
+						<a href="/" onClick={logout}>
+							Logout
 						</a>
 					</li>
 				</ul>
