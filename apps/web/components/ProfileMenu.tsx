@@ -29,6 +29,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({ image, name }) => {
 					</li>
 					<li>
 						<a
+							href="#"
 							onClick={(e) => {
 								e.preventDefault();
 								signOut();
