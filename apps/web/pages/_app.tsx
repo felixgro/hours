@@ -1,10 +1,13 @@
+import '../public/static/css/global.css';
 import * as React from 'react';
+import { Header } from '../components/Header';
 import { SessionProvider } from 'next-auth/react';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
 	return (
 		<SessionProvider session={session}>
-			<Component {...pageProps} />;
+			<Header />
+			<Component {...pageProps} />
 		</SessionProvider>
 	);
 }
