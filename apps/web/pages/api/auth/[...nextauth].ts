@@ -1,5 +1,4 @@
-import NextAuth, { Awaitable, User } from "next-auth";
-import { JWT } from 'next-auth/jwt';
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
@@ -16,6 +15,7 @@ export default NextAuth({
             },
         }),
     ],
+    secret: process.env.AUTH_SECRET,
     jwt: {
         secret: process.env.JWT_SECRET,
     },
