@@ -1,5 +1,14 @@
-const withTM = require("next-transpile-modules")(["ui"]);
+const withTM = require('next-transpile-modules')([
+	'ui',
+	'@fullcalendar/react',
+	'@fullcalendar/common',
+	'@fullcalendar/daygrid',
+	'@fullcalendar/timegrid',
+	'@fullcalendar/interaction',
+	'@fullcalendar/scrollgrid',
+	'@fullcalendar/list',
+]);
 
 module.exports = withTM({
-  reactStrictMode: true,
+	reactStrictMode: true,
 });

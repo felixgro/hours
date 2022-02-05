@@ -1,7 +1,18 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export default NextAuth({
+    secret: process.env.NEXTAUTH_SECRET,
+    adapter: PrismaAdapter(prisma),
+    session: {
+        strategy: "database",
+        maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+        updateAge: 12 * 60 * 60 * 1000, // 12 hours
+    },
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
@@ -13,24 +24,12 @@ export default NextAuth({
                     response_type: "code"
                 }
             },
-        }),
+        })
     ],
-    secret: process.env.AUTH_SECRET,
-    jwt: {
-        secret: process.env.JWT_SECRET,
-    },
     callbacks: {
         jwt: async ({ token, account }) => {
-            if (account?.access_token) {
-                token.access_token = account.access_token;
-            }
+            if (account?.access_token) token.access_token = account.access_token;
             return token;
         },
-        redirect: async ({ url, baseUrl }) => {
-            if (url === '/profile') {
-                return Promise.resolve('/');
-            }
-            return Promise.resolve('/');
-        }
     }
 });
