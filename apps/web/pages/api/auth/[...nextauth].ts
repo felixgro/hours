@@ -27,6 +27,10 @@ export default NextAuth({
         })
     ],
     callbacks: {
+        session: async ({ session, user }) => {
+            (session.user as any).id = user.id;
+            return session;
+        },
         jwt: async ({ token, account }) => {
             if (account?.access_token) token.access_token = account.access_token;
             return token;
